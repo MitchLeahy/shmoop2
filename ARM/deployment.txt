@@ -1,0 +1,13 @@
+# First, create the resource group
+az group create --name your-resource-group-name --location eastus
+
+# Then deploy the ARM template
+az deployment group create \
+  --name dalle-generator-deployment \
+  --resource-group your-resource-group-name \
+  --template-file ARM/azuredeploy.json \
+  --parameters @ARM/azuredeploy.parameters.json 
+
+# You can also deploy using Azure PowerShell
+# New-AzResourceGroup -Name your-resource-group-name -Location eastus
+# New-AzResourceGroupDeployment -ResourceGroupName your-resource-group-name -TemplateFile ARM/azuredeploy.json -TemplateParameterFile ARM/azuredeploy.parameters.json -openAiApiKey your-openai-api-key
