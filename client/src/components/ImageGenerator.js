@@ -13,12 +13,14 @@ const ImageGenerator = () => {
     setError(null);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/images/generate', {
-        prompt,
-        userId: 'test-user' // In a real app, this would come from authentication
+      const response = await axios.post('http://localhost:5001/api/images/generate', {
+        prompt
       });
 
-      setGeneratedImage(response.data.image);
+      setGeneratedImage({
+        url: response.data.imageUrl,
+        prompt: response.data.prompt
+      });
     } catch (err) {
       setError(err.message);
     } finally {
@@ -45,7 +47,7 @@ const ImageGenerator = () => {
       
       {generatedImage && (
         <div className="generated-image">
-          <img src={generatedImage.imageUrl} alt={generatedImage.prompt} />
+          <img src={generatedImage.url} alt={generatedImage.prompt} />
           <p>Prompt: {generatedImage.prompt}</p>
         </div>
       )}
