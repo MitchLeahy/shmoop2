@@ -4,8 +4,16 @@ const imageRoutes = require('./routes/imageRoutes');
 
 const app = express();
 
+// CORS configuration
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? 'https://shmoop-web.azurewebsites.net'
+    : 'http://localhost:3000',
+  optionsSuccessStatus: 200
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Routes

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import config from '../config';
 
 const ImageGenerator = () => {
   const [prompt, setPrompt] = useState('');
@@ -13,7 +14,7 @@ const ImageGenerator = () => {
     setError(null);
 
     try {
-      const response = await axios.post('http://localhost:5001/api/images/generate', {
+      const response = await axios.post(`${config.apiBaseUrl}/api/images/generate`, {
         prompt
       });
 
